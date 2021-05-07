@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plugin>
+<!-- Business Bot Builder Plugin Function Descriptor for the Business Bot 
+	Platform -->
+<Plugin>
+	<PluginFunction>
+		<FunctionName>getMathResult</FunctionName>
+		<FunctionDescription>Calculate a math task</FunctionDescription>
+		<ExpectedParameters>1</ExpectedParameters>
+		<PluginFunctionParameter>
+			<SequenceId>1</SequenceId>
+			<ParameterName>mathTask</ParameterName>
+			<DefaultValue>10+5</DefaultValue>
+			<ExampleValue>10+5</ExampleValue>
+			<Description>Math task to calculate</Description>
+		</PluginFunctionParameter>		
+	</PluginFunction>	
+</Plugin>
