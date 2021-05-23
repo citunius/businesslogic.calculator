@@ -1,5 +1,5 @@
 /*
- * Copyright: (c) 2015-2019, Citunius GmbH. All rights reserved.
+ * Copyright: (c) 2015-2021, Citunius GmbH. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Licence: This program contains proprietary and trade secret information of Citunius GmbH.
@@ -8,7 +8,6 @@
  *          See: https://www.citunius.de/en/legal
  *
  * Requires: JDK 1.8+
- * $Id: ActionHandler.java 16 2021-04-07 19:52:34Z  $
  *
  */
 package de.citunius.businesslogic.calculator.botbuilder;
@@ -139,6 +138,6 @@ public class ActionHandler {
 		} else {
 			logger.error("Bot Builder function is not implemented");
 			return null;
-		}    	
+		}
 	}
 }

@@ -8,7 +8,6 @@
  *          See: https://www.citunius.de/en/legal
  *
  * Requires: JDK 1.8+
- * $Id: ConstantsCalculator.java 12 2020-01-21 11:40:54Z  $
  *
  */
 package de.citunius.businesslogic.calculator;
@@ -20,7 +19,6 @@ package de.citunius.businesslogic.calculator;
  * @version %I%, %G%
  * @since   1.0
  */
-
 public class ConstantsBot {
 	// Plugin name
 	public static final String PLUGIN_NAME = "GM.Calculator";

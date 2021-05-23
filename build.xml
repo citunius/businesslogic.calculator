@@ -1,4 +1,4 @@
-<project name="BusinessLogic.GM.Calculator" default="cleandist" basedir=".">
+<project name="businesslogic.calculator" default="cleandist" basedir=".">
 
 	<!-- Load system environment variables defined in batch file -->
 	<property environment="env" />
@@ -11,7 +11,7 @@
 	<property name="pluginid" value="de.citunius.generic.calculator" />
 	<property name="project.version" value="1.0.0"/>
 	<property name="project.provider" value="Citunius GmbH"/>
-	<property name="project.name" value="BusinessLogic.GM.Calculator" />
+	<property name="project.name" value="businesslogic.calculator" />
 	<property name="project.source.dir" value="..\..\source\${project.name}" />
 	<property name="project.git.dir" value="." />
 	

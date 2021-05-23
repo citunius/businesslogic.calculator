@@ -1,5 +1,5 @@
 /*
- * Copyright: (c) 2015-2019, Citunius GmbH. All rights reserved.
+ * Copyright: (c) 2015-2021, Citunius GmbH. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Licence: This program contains proprietary and trade secret information of Citunius GmbH.
@@ -8,10 +8,8 @@
  *          See: https://www.citunius.de/en/legal
  *
  * Requires: JDK 1.8+
- * $Id: CalculatorBot.java 12 2020-01-21 11:40:54Z  $
  *
  */
-
 package de.citunius.businesslogic.calculator;
 
 import java.io.IOException;
@@ -46,11 +44,8 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 /**
- * CalculatorBotHandlers is the class represents the service bot calculator use case.
- * This service bot interacts with the mobile user and manages all user requests and responses.
- * 
- * Moreover, this service bot remembers the current user state (user menu),
- * composes message views and menus for the mobile user.
+ * CalculatorBot is the class represents the business logic calculator use case.
+ * This business logic interacts with the mobile user and manages all user requests and responses.
  *
  * @author me
  * @version %I%, %G%
@@ -90,12 +85,12 @@ public class CalculatorBot {
      */
     public PluginReturnMessage managePageRequestForMessageObjectResult(Message message, String userId, Filter filter, String username) {    	
 		try {
-			// Create the corresponding telegram message
+			// Create the corresponding common message
 			if (null != filter.getView() && filter.getView().equals(ConstantsBot.VIEW_DEFAULT) ) {
-				// Print results using the default template for telegram message
+				// Print results using the default template for a common message
 				return composePageForDefaultObjectList(userId, filter, message, username);
 			} else {
-				// Print results using standard telegram message
+				// Print results using standard common message
 				return composePageForDefaultObjectList(userId, filter, message, username);
 			}
 		} catch (TemplateException e) {
@@ -247,8 +242,8 @@ public class CalculatorBot {
 		}
 		
 		String replySubject = ls.getString("Common.DefaultReplySubject", defaultLanguage);
-    	String replyMessage = "No reply content";
-    	String replyErrorMessage = ls.getString("Common.Error", defaultLanguage);  	
+		String replyMessage = "No reply content";
+		String replyErrorMessage = ls.getString("Common.Error", defaultLanguage);  	
 		
     	try {
 			Userstate userstate = Utilities.getUserState(tenantId, accountId, ConstantsPlugin.PLUGIN_NAME, pluginMap, message.getFrom().getUserName());
@@ -303,22 +298,21 @@ public class CalculatorBot {
 		return pluginReturnMessage.toJson().toString();
 	}
 	
-	
 	/**
 	 * Call webservice to schedule a callback for this plugin
 	 * 
 	 * @param mobileUserAccount  the mobile user account object
 	 * @return
 	 */
-	public boolean scheduleCallback(boolean anonymousUserAccountExists, AnonymousUserAccount anonymousUserAccount, boolean mobileUserAccountExists, MobileUserAccount mobileUserAccount) {
+	public boolean scheduleCallback(boolean hasAnonymousUserAccount, AnonymousUserAccount anonymousUserAccount, boolean hasMobileUserAccount, MobileUserAccount mobileUserAccount) {
 		String cronSchedule = "0 0/1 * * * ? *";
 		String callbackMessage = "reminder-xy";
 		ChatbotCallback chatbotCallback = new ChatbotCallback(
 				Integer.parseInt(pluginMap.get(ConstantsPlugin.BOTID)), 
 				Integer.parseInt(pluginMap.get(ConstantsPlugin.PLUGIN_ID)), 
-				anonymousUserAccountExists,
+				hasAnonymousUserAccount,
 				anonymousUserAccount,
-				mobileUserAccountExists,
+				hasMobileUserAccount,
 				mobileUserAccount, 
 				cronSchedule, 
 				callbackMessage);
@@ -333,7 +327,7 @@ public class CalculatorBot {
 			return false;
 		}
 		if (receiptId != null && receiptId.length() != 0) {
-			logger.info("Chatbot callback ["+chatbotCallback.getCallbackMessage()+"] has been registed to BBP webservices successfully. Receipt Id: ["+receiptId+"]");
+			logger.info("Chatbot callback ["+chatbotCallback.getCallbackMessage()+"] has been registered to BBP webservices successfully. Receipt Id: ["+receiptId+"]");
 		} else {
 			logger.error("Failed to register chatbot callback ["+chatbotCallback.getCallbackMessage()+"] to BBP webservices");
 			return false;
@@ -381,7 +375,7 @@ public class CalculatorBot {
 		
 		PluginReturnMessage pluginReturnMessage = managePageRequestForMessageObjectResult(message, userId, filter, (mobileUserAccountExists ? mobileUserAccount.getUsername() : null));
 		// Manage attachments
-		PluginReturnMessage pluginReturnMessageWithAttachments = manageAttachments(pluginReturnMessage, message);		
+		PluginReturnMessage pluginReturnMessageWithAttachments = manageAttachments(pluginReturnMessage, message);
 		return pluginReturnMessageWithAttachments.toJson().toString();
     }
 	
@@ -405,7 +399,7 @@ public class CalculatorBot {
 			logger.info("Adding location to pluginReturnMessage");
 			pluginReturnMessage.setLocation(message.getLocation());
 		}
-		if (message.getPhoto() != null) {
+		if (message.getPhoto() != null && message.getPhoto().size() != 0) {
 			logger.info("Adding photo to pluginReturnMessage");
 			pluginReturnMessage.setPhoto(message.getPhoto());
 		}

@@ -8,7 +8,6 @@
  *          See: https://www.citunius.de/en/legal
  *
  * Requires: JDK 1.8+
- * $Id: PluginClient.java 15 2021-03-25 18:30:28Z  $
  *
  */
 package de.citunius.businesslogic.calculator.plugin;
@@ -186,7 +185,7 @@ public class PluginClient extends Plugin {
 		@Override
 		public String sendMessage(String tenantId, String accountId, HashMap<String, String> pluginMap, String jsonMessage, String jsonFilter, boolean anonymousUserAccountExists, String jsonAnonymousUserAccount, boolean mobileUserAccountExists, String jsonMobileUserAccount) {
 			logger.info("Plugin -> jsonMessage: "+jsonMessage);
-			BusinessLogic.pluginMap = pluginMap;			
+			BusinessLogic.pluginMap = pluginMap;
 			CalculatorBot calBotHandlers = new CalculatorBot(tenantId, accountId, pluginMap);
 			String sendMessageJsonStr = calBotHandlers.sendTextMessage(tenantId, accountId, jsonMessage, jsonFilter, anonymousUserAccountExists, jsonAnonymousUserAccount, mobileUserAccountExists, jsonMobileUserAccount);
 			return sendMessageJsonStr;

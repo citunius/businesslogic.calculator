@@ -1,5 +1,5 @@
 /*
- * Copyright: (c) 2015-2019, Citunius GmbH. All rights reserved.
+ * Copyright: (c) 2015-2021, Citunius GmbH. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Licence: This program contains proprietary and trade secret information of Citunius GmbH.
@@ -8,7 +8,6 @@
  *          See: https://www.citunius.de/en/legal
  *
  * Requires: JDK 1.8+
- * $Id: BotBuilder.java 12 2020-01-21 11:40:54Z  $
  *
  */
 package de.citunius.businesslogic.calculator.botbuilder;
@@ -24,7 +23,7 @@ import de.citunius.businesslogicapi.common.botbuilder.BotBuilderService;
 import de.citunius.businesslogicapi.common.services.LocalisationService;
 
 /**
- * BotBuilderService is the class represents the services for the Bot Builder Model.
+ * BotBuilder is the class represents the services for the Dialogue Designer Model.
  * This service calls the use case specific functions of this business bot plugin.
  * This class is called using Java reflections.
  *
